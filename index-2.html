@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Stack Selector | Way of the Digital Warrior</title>
+<meta name="description" content="Answer 10 questions. Get a personalized marketing tech stack mapped to your belt level.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#07070f;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.app{background:#0e0e14;width:100%;max-width:640px;min-height:560px;padding:32px 28px;border-radius:16px;border:1px solid #1e1e2e}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.logo{font-size:11px;font-weight:600;letter-spacing:2.5px;color:#C8A84B;text-transform:uppercase}
+.pw{flex:1;margin:0 20px}
+.pt{height:3px;background:#2a2a3a;border-radius:2px}
+.pf{height:3px;background:#C8A84B;border-radius:2px;transition:width 0.35s}
+.sl{font-size:11px;color:#555;margin-top:6px;text-align:right}
+.mt{font-size:10px;font-weight:600;letter-spacing:1.5px;color:#C8A84B;text-transform:uppercase;margin-bottom:10px}
+.qt{font-size:20px;font-weight:500;color:#f0ede8;line-height:1.4;margin-bottom:8px}
+.qs{font-size:14px;color:#666;margin-bottom:24px;line-height:1.6}
+.opts{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.opt{background:#161620;border:1px solid #2a2a3a;border-radius:10px;padding:16px 18px;cursor:pointer;transition:border-color 0.15s,background 0.15s}
+.opt:hover{border-color:#C8A84B;background:#1c1c28}
+.opt.sel{border-color:#C8A84B;background:#1c1c28}
+.ol{font-size:15px;color:#d8d5d0;font-weight:500}
+.os{font-size:12px;color:#888;margin-top:4px}
+.wnav{display:flex;justify-content:space-between;align-items:center}
+.bback{background:none;border:1px solid #2a2a3a;color:#777;font-size:13px;padding:11px 22px;border-radius:8px;cursor:pointer}
+.bback:hover{border-color:#555;color:#bbb}
+.bnxt{background:#C8A84B;border:none;color:#0e0e14;font-size:14px;font-weight:600;padding:13px 30px;border-radius:8px;cursor:pointer}
+.bnxt:hover{background:#d9b85c}
+.cvl{font-size:11px;letter-spacing:3px;color:#C8A84B;text-transform:uppercase;text-align:center;margin-bottom:20px}
+.cvt{font-size:28px;font-weight:500;color:#f0ede8;text-align:center;line-height:1.3;margin-bottom:14px}
+.cvs{font-size:15px;color:#888;text-align:center;line-height:1.7;margin-bottom:32px;max-width:380px;margin-left:auto;margin-right:auto}
+.cvg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px}
+.cvn{background:#161620;border:1px solid #2a2a3a;border-radius:10px;padding:16px;text-align:center}
+.cvnn{font-size:24px;font-weight:500;color:#C8A84B}
+.cvnl{font-size:11px;color:#666;margin-top:5px}
+.bst{background:#C8A84B;border:none;color:#0e0e14;font-size:16px;font-weight:600;padding:15px 44px;border-radius:10px;cursor:pointer;display:block;margin:0 auto}
+.bst:hover{background:#d9b85c}
+.cap-wrap{margin-bottom:20px}
+.cap-label{font-size:13px;color:#888;margin-bottom:8px;display:block}
+.cap-input{width:100%;background:#161620;border:1px solid #2a2a3a;border-radius:10px;padding:14px 16px;font-size:15px;color:#f0ede8;outline:none;transition:border-color 0.15s;-webkit-appearance:none}
+.cap-input:focus{border-color:#C8A84B}
+.cap-input::placeholder{color:#444}
+.cap-note{font-size:12px;color:#444;margin-top:16px;line-height:1.6;text-align:center}
+.bpill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:8px;margin-bottom:16px}
+.bdots{display:flex;gap:5px}
+.bdot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.blt{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.rtt{font-size:22px;font-weight:500;color:#f0ede8;margin-bottom:8px}
+.rin{font-size:14px;color:#888;line-height:1.7;margin-bottom:8px}
+.rph{font-size:14px;color:#C8A84B;font-style:italic;line-height:1.6;margin-bottom:16px}
+.rcn{font-size:13px;color:#C8A84B;line-height:1.6;padding:12px 0;border-top:1px solid #2a2a3a;margin-bottom:18px}
+.rab{background:#1c1400;border:1px solid #854F0B;border-radius:10px;padding:16px 18px;margin-bottom:22px}
+.rat{font-size:10px;font-weight:600;letter-spacing:1px;color:#EF9F27;text-transform:uppercase;margin-bottom:6px}
+.rai{font-size:13px;color:#a08030;line-height:1.6}
+.rsg{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.rsr{background:#161620;border:1px solid #2a2a3a;border-radius:10px;padding:16px 18px;display:flex;align-items:flex-start;gap:16px}
+.rsi{width:38px;height:38px;border-radius:8px;background:#1f1f2e;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#C8A84B;flex-shrink:0;text-align:center;line-height:1.2}
+.rsc{font-size:10px;font-weight:600;letter-spacing:1px;color:#C8A84B;text-transform:uppercase;margin-bottom:8px}
+.tool-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.tool-num{font-size:11px;font-weight:600;color:#555;min-width:16px}
+.tool-name{font-size:15px;font-weight:500;color:#f0ede8}
+.tool-name-alt{font-size:15px;font-weight:500;color:#b8a060}
+.tool-divider{height:1px;background:#252530;margin:8px 0}
+.rsw{font-size:13px;color:#777;line-height:1.6}
+.rdv{height:1px;background:#2a2a3a;margin:24px 0}
+.rct{background:#161620;border:1px solid #C8A84B;border-radius:10px;padding:24px;text-align:center}
+.rctt{font-size:17px;font-weight:500;color:#f0ede8;margin-bottom:8px}
+.rcts{font-size:14px;color:#888;margin-bottom:20px;line-height:1.6}
+.bct{background:#C8A84B;border:none;color:#0e0e14;font-size:15px;font-weight:600;padding:14px 28px;border-radius:10px;cursor:pointer;display:block;width:100%}
+.bct:hover{background:#d9b85c}
+.brs{background:none;border:1px solid #2a2a3a;color:#555;font-size:12px;padding:9px 20px;border-radius:8px;cursor:pointer;display:block;margin:14px auto 0}
+.brs:hover{border-color:#444;color:#999}
+.wf{text-align:center;margin-top:28px;font-size:11px;color:#333;letter-spacing:1px}
+@media(max-width:480px){body{padding:16px 12px}.app{padding:24px 18px}.cvt{font-size:22px}.qt{font-size:17px}}
+</style>
+</head>
+<body>
+
+<!-- Netlify Forms backup — do not remove -->
+<form name="wotdw-responses" netlify netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="wotdw-responses">
+  <input type="text" name="bot-field">
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="text" name="belt_level">
+  <input type="text" name="q1_business_type">
+  <input type="text" name="q2_sales_method">
+  <input type="text" name="q3_audience_location">
+  <input type="text" name="q4_budget">
+  <input type="text" name="q5_free_tools">
+  <input type="text" name="q6_unused_subscriptions">
+  <input type="text" name="q7_tech_comfort">
+  <input type="text" name="q8_landing_page">
+  <input type="text" name="q9_email_list">
+  <input type="text" name="q10_paid_ads">
+</form>
+
+<div class="app">
+
+  <div id="wcover">
+    <div class="cvl">Way of the Digital Warrior</div>
+    <div class="cvt">Find your perfect marketing tech stack</div>
+    <div class="cvs">Answer 10 questions. Get a personalized stack mapped to your belt level. No jargon, no overwhelm.</div>
+    <div class="cvg">
+      <div class="cvn"><div class="cvnn">10</div><div class="cvnl">questions</div></div>
+      <div class="cvn"><div class="cvnn">3-5</div><div class="cvnl">minutes</div></div>
+      <div class="cvn"><div class="cvnn">10</div><div class="cvnl">categories</div></div>
+    </div>
+    <button class="bst" onclick="wStart()">Begin your assessment</button>
+    <div class="wf">wayofthedigitalwarrior.org</div>
+  </div>
+
+  <div id="wq" style="display:none">
+    <div class="topbar">
+      <div class="logo">WOTDW</div>
+      <div class="pw"><div class="pt"><div class="pf" id="wpf"></div></div><div class="sl" id="wsl"></div></div>
+    </div>
+    <div class="mt" id="wmt"></div>
+    <div class="qt" id="wqt"></div>
+    <div class="qs" id="wqs"></div>
+    <div class="opts" id="wopts"></div>
+    <div class="wnav">
+      <button class="bback" onclick="wPrev()">Back</button>
+      <button class="bnxt" id="wbn" onclick="wNext()">Next</button>
+    </div>
+  </div>
+
+  <div id="wcap" style="display:none">
+    <div class="topbar">
+      <div class="logo">WOTDW</div>
+      <div class="pw"><div class="pt"><div class="pf" style="width:100%"></div></div><div class="sl">Almost there</div></div>
+    </div>
+    <div class="mt">Your results are ready</div>
+    <div class="qt">Where should we send your stack?</div>
+    <div class="qs">Enter your name and email to see your personalized results.</div>
+    <div class="cap-wrap">
+      <label class="cap-label">First name</label>
+      <input class="cap-input" type="text" id="cap-name" placeholder="Your first name" autocomplete="given-name">
+    </div>
+    <div class="cap-wrap">
+      <label class="cap-label">Email address</label>
+      <input class="cap-input" type="email" id="cap-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="cap-note">Your information is kept private and will never be shared or sold.</div>
+    <br>
+    <div class="wnav">
+      <button class="bback" onclick="showQ()">Back</button>
+      <button class="bnxt" onclick="submitAndShow()">See my results</button>
+    </div>
+  </div>
+
+  <div id="wres" style="display:none"></div>
+
+</div>
+
+<script>
+var GHL_WEBHOOK='YOUR_GHL_WEBHOOK_URL_HERE';
+
+var WQs=[
+  {mod:"Module 1 - Business Model",q:"What best describes your business?",sub:"This helps us filter which tool categories matter most for your situation.",opts:[{l:"Service-based",s:"Coaching, consulting, freelancing, done-for-you"},{l:"Course or group program",s:"You teach, train, or facilitate learning"},{l:"E-commerce or product-based",s:"Physical or digital products for sale"},{l:"Content creator",s:"Monetizing through audience, ads, or sponsorships"},{l:"Hybrid or not sure yet",s:"Mix of the above, or still figuring it out"}]},
+  {mod:"Module 1 - Business Model",q:"How do you primarily sell?",sub:"Your sales method shapes the complexity of funnel tools you actually need.",opts:[{l:"1-on-1 via calls, DMs, or referrals"},{l:"Group programs or cohorts"},{l:"Passive or evergreen - people buy without talking to me"},{l:"Live launches - I open and close cart on a schedule"},{l:"Not selling yet - still building"}]},
+  {mod:"Module 1 - Business Model",q:"Where does your audience primarily live?",sub:"We use this to weight your top-of-funnel tool recommendations.",opts:[{l:"Email list"},{l:"Social media such as Instagram, LinkedIn, TikTok, or Facebook"},{l:"Search, SEO, or YouTube"},{l:"Paid ads"},{l:"Word of mouth - I do not have a platform yet"}]},
+  {mod:"Module 2 - Budget",q:"What is your current monthly tool budget?",sub:"Be honest. This is how we make sure recommendations are actually usable for you right now.",opts:[{l:"$0 to $50 - free tools only",s:"White and Yellow Belt range"},{l:"$51 to $150 per month",s:"Yellow Belt range"},{l:"$151 to $300 per month",s:"Orange and Green Belt range"},{l:"$301 to $500 per month",s:"Green Belt range"},{l:"$500 or more per month",s:"Blue Belt and above"}]},
+  {mod:"Module 2 - Budget",q:"Are you open to free tools with limitations?",sub:"Some free tools are genuinely great. Others will slow you down. We want to know your mindset.",opts:[{l:"Yes - free is the priority right now"},{l:"Yes, if the free version does what I need"},{l:"No - I want reliable paid tools I can grow into"}]},
+  {mod:"Module 2 - Budget",q:"Do you have paid subscriptions you are not fully using?",sub:"This flags whether a stack audit might save you money before we add anything new.",opts:[{l:"Yes - I am paying for tools I barely use"},{l:"Maybe - not sure what I am actually using"},{l:"No - my current tools are lean and intentional"},{l:"I have no paid tools yet"}]},
+  {mod:"Module 3 - Tech Maturity",q:"How comfortable are you with tech tools in general?",sub:"No judgment here. This is where your belt level starts.",opts:[{l:"Terrified - tech makes me want to quit",s:"White and Yellow Belt"},{l:"Beginner - I can follow instructions but it is slow",s:"Yellow and Orange Belt"},{l:"Comfortable - I can figure most things out",s:"Orange and Green Belt"},{l:"Confident - I set up most things myself",s:"Blue and Purple Belt"},{l:"I am basically the tech person in my circle",s:"Brown, Red, Bodan, and Black Belt"}]},
+  {mod:"Module 3 - Tech Maturity",q:"Have you ever built a landing page or opt-in form?",sub:"This calibrates how complex your funnel tool recommendation should be.",opts:[{l:"No - I have never done this"},{l:"Yes, with help or a template"},{l:"Yes, I built one on my own"},{l:"Yes, I have built multiple funnels"}]},
+  {mod:"Module 3 - Tech Maturity",q:"Do you currently have an email list?",sub:"List size determines which email platform tier makes sense for you right now.",opts:[{l:"No list yet"},{l:"Under 100 subscribers"},{l:"100 to 1,000 subscribers"},{l:"1,000 to 5,000 subscribers"},{l:"5,000 or more subscribers"}]},
+  {mod:"Module 3 - Tech Maturity",q:"Have you ever run a paid ad campaign?",sub:"Last question. This determines whether ad management tools belong in your stack.",opts:[{l:"Never - ads are not on my radar yet"},{l:"Once or twice - I tried it"},{l:"Occasionally - ads are part of my mix"},{l:"Regularly - paid ads are a core channel for me"}]}
+];
+
+var BELTS={
+  wy:{label:"White Belt / Yellow Belt",dot1:"#e0ddd8",dot2:"#C8A84B",pillbg:"#1e1e18",pillborder:"#555",intro:"You are exactly where thousands of business owners start and that is the right place to be. Your goal is not to have every tool. It is to have the right three.",philosophy:"Start simple. One tool per job. Add your first paid tool when you outgrow free.",tools:[{cat:"Email",ico:"EM",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Handles email, funnels, and your website in one place. Ideal starting point before splitting tools across platforms."},{cat:"Funnel",ico:"FN",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Build your first opt-in or sales page inside the same platform as your email. No extra cost, no extra login."},{cat:"Website",ico:"WB",t1:"SalesFunnels.io",t2:"Canva Sites",why:"Canva Sites is free and launches in minutes. SalesFunnels.io keeps everything under one roof."},{cat:"Visuals",ico:"VS",t1:"Canva",t2:"Galaxy.ai",why:"Canva free handles 90% of what you need at this stage. Galaxy.ai adds AI-generated imagery when you are ready."},{cat:"Content",ico:"CN",t1:"Claude Pro + custom GPTs",t2:"ChatGPT Plus",why:"Start writing with AI assistance before investing in more advanced content tools."},{cat:"AI Assistant",ico:"AI",t1:"Claude",t2:"ChatGPT",why:"Free tier is enough to get started. Learn to prompt well before upgrading."},{cat:"Presentations",ico:"PR",t1:"Canva",t2:"Gamma",why:"Canva handles slide decks cleanly. Gamma creates AI-generated decks quickly when you need speed."},{cat:"Voice",ico:"VO",t1:"Revoicer",t2:"Eleven Labs",why:"Revoicer is a solid entry-level AI voice tool. Eleven Labs offers more variety as you grow."},{cat:"Automation",ico:"AU",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Use built-in automations inside your platform before adding any external automation tool."},{cat:"Analytics",ico:"AN",t1:"SalesFunnels.io",t2:"Google Analytics",why:"Start with your platform analytics. Add Google Analytics for cross-site visibility when ready."}]},
+  og:{label:"Orange Belt / Green Belt",dot1:"#EF9F27",dot2:"#5DCAA5",pillbg:"#1a1800",pillborder:"#EF9F27",intro:"You have the basics. Now it is time to tighten the stack, automate one workflow, and eliminate the overlap before adding anything new.",philosophy:"Tighten the stack. Automate one workflow and consolidate where possible.",tools:[{cat:"Email",ico:"EM",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Both handle full email automation. GoHighLevel adds CRM and pipeline tracking for service-based businesses."},{cat:"Funnel",ico:"FN",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Multi-step funnels with upsells and follow-up sequences become essential at this level."},{cat:"Website",ico:"WB",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Move your site inside your funnel platform to eliminate disconnected tools and simplify tracking."},{cat:"Visuals",ico:"VS",t1:"Canva",t2:"Galaxy.ai",why:"Upgrade to Canva Pro for Brand Kit and team sharing. Galaxy.ai adds AI-generated imagery beyond templates."},{cat:"Content",ico:"CN",t1:"Claude Pro + custom GPTs",t2:"ChatGPT Plus",why:"Claude Pro for strategy and long-form. Custom GPTs tuned to your voice and audience."},{cat:"AI Assistant",ico:"AI",t1:"Claude",t2:"ChatGPT",why:"More nuanced reasoning for content strategy, curriculum design, and planning."},{cat:"Presentations",ico:"PR",t1:"Canva",t2:"Gamma",why:"Gamma for AI-generated decks quickly. Canva Pro for brand-consistent slide design."},{cat:"Voice",ico:"VO",t1:"Revoicer",t2:"Eleven Labs",why:"Eleven Labs offers more voice variety and higher audio quality for polished course content."},{cat:"Automation",ico:"AU",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Build your first end-to-end automation from lead capture to welcome sequence to follow-up."},{cat:"Analytics",ico:"AN",t1:"SalesFunnels.io",t2:"Google Analytics",why:"Use your platform analytics first. Add Google Analytics for cross-platform visibility."}]},
+  bp:{label:"Blue Belt / Purple Belt",dot1:"#378ADD",dot2:"#7F77DD",pillbg:"#10102a",pillborder:"#7F77DD",intro:"You are confident and scaling. Your stack should be fully integrated, automation-first, and every tool should be earning its place with measurable output.",philosophy:"Automation-first. Full stack. Analytics-driven. Build systems, not just tools.",tools:[{cat:"Email",ico:"EM",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Full email automation with CRM integration. At this level, consolidation is the strategy."},{cat:"Funnel",ico:"FN",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"GoHighLevel handles your entire funnel ecosystem. Stop paying for separate funnel software."},{cat:"Website",ico:"WB",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Host your site inside your platform for seamless tracking, form capture, and follow-up automation."},{cat:"Visuals",ico:"VS",t1:"Canva",t2:"Galaxy.ai",why:"Canva Pro for brand assets. Galaxy.ai for AI-generated visuals that push beyond templates."},{cat:"Content",ico:"CN",t1:"Claude Pro + custom GPTs",t2:"ChatGPT Plus",why:"Build AI workflows tuned to your program methodology, your voice, and your student outcomes."},{cat:"AI Assistant",ico:"AI",t1:"Claude",t2:"ChatGPT",why:"Claude for research, strategy, curriculum refinement, and content systems at scale."},{cat:"Presentations",ico:"PR",t1:"Canva",t2:"Gamma",why:"Gamma for rapid deck creation. Canva Pro for polished, brand-consistent presentation assets."},{cat:"Voice",ico:"VO",t1:"Revoicer",t2:"Eleven Labs",why:"Eleven Labs for high-fidelity voice cloning and generation for course modules and branded audio."},{cat:"Automation",ico:"AU",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Build multi-trigger automations across email, SMS, pipeline stages, and appointment booking."},{cat:"Analytics",ico:"AN",t1:"SalesFunnels.io",t2:"Google Analytics",why:"Your platform analytics covers most needs. Add Google Analytics to close any gaps."}]},
+  br:{label:"Brown Belt / Red Belt",dot1:"#8B5E3C",dot2:"#E24B4A",pillbg:"#1a0e0e",pillborder:"#A32D2D",intro:"You think in systems, not tools. Every platform in your stack should integrate, report, and generate ROI. Anything that does not is a candidate for removal.",philosophy:"Platform-level thinking. Integration over addition. ROI on every tool in the stack.",tools:[{cat:"Email",ico:"EM",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Your email platform is also your CRM, your pipeline, and your reporting hub at this level."},{cat:"Funnel",ico:"FN",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"All funnels inside one platform. A/B testing, conversion tracking, and pipeline integration are standard."},{cat:"Website",ico:"WB",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Full website with integrated analytics, form capture, and automation triggers in one place."},{cat:"Visuals",ico:"VS",t1:"Canva",t2:"Galaxy.ai",why:"Galaxy.ai for AI-generated imagery at scale. Canva Pro for brand consistency across all assets."},{cat:"Content",ico:"CN",t1:"Claude Pro + custom GPTs",t2:"ChatGPT Plus",why:"Custom AI content systems built around your IP, your methodology, and your student journey."},{cat:"AI Assistant",ico:"AI",t1:"Claude",t2:"ChatGPT",why:"High-level strategic thinking, program refinement, and complex content architecture."},{cat:"Presentations",ico:"PR",t1:"Canva",t2:"Gamma",why:"Gamma for speed. Canva Pro for brand-aligned, polished deliverables for clients and students."},{cat:"Voice",ico:"VO",t1:"Revoicer",t2:"Eleven Labs",why:"Voice clone your own voice for scalable course narration, promos, and automated outreach."},{cat:"Automation",ico:"AU",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Advanced multi-step automations across every touchpoint from lead through retention."},{cat:"Analytics",ico:"AN",t1:"SalesFunnels.io",t2:"Google Analytics",why:"Cross-reference platform data with Google Analytics to close reporting gaps and validate attribution."}]},
+  bb:{label:"Bodan / Black Belt",dot1:"#C8A84B",dot2:"#f0ede8",pillbg:"#111108",pillborder:"#C8A84B",intro:"You are at the top of the progression. You may be teaching others, leading organizations, or building client systems. Your stack is a masterclass in integration and intentionality.",philosophy:"Master-level stack. Custom configurations, API-level thinking, and leading the room.",tools:[{cat:"Email",ico:"EM",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Full platform mastery. You are likely managing automations for your own business and guiding others."},{cat:"Funnel",ico:"FN",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Custom funnel builds, split testing, and client-grade delivery. Your platform is your command center."},{cat:"Website",ico:"WB",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"Site, funnel, booking, and automation all integrated. Nothing lives outside the platform without a reason."},{cat:"Visuals",ico:"VS",t1:"Canva",t2:"Galaxy.ai",why:"You may be producing assets for students or clients. Galaxy.ai extends your visual output at scale."},{cat:"Content",ico:"CN",t1:"Claude Pro + custom GPTs",t2:"ChatGPT Plus",why:"You have likely built custom AI workflows. Your content system runs with minimal manual input."},{cat:"AI Assistant",ico:"AI",t1:"Claude",t2:"ChatGPT",why:"Claude as a strategic thinking partner for curriculum development, program design, and business decisions."},{cat:"Presentations",ico:"PR",t1:"Canva",t2:"Gamma",why:"Both tools at full mastery. You choose based on audience and delivery context."},{cat:"Voice",ico:"VO",t1:"Revoicer",t2:"Eleven Labs",why:"Your voice runs in courses, automations, and content without you needing to be live."},{cat:"Automation",ico:"AU",t1:"SalesFunnels.io",t2:"GoHighLevel",why:"You are building automation architecture. Others learn from your workflows."},{cat:"Analytics",ico:"AN",t1:"SalesFunnels.io",t2:"Google Analytics",why:"Full attribution model. Every marketing dollar is tracked from source to sale."}]}
+};
+
+var bizNotes=["Focus on your booking and scheduling workflow first. That is your highest-leverage starting point.","Your course platform and community tool matter as much as your funnel. Do not skip that decision.","Prioritize email capture and analytics above all else. That is where product revenue lives.","Your content scheduling and analytics tools are infrastructure. Treat them that way.","Start with email capture. Build an owned audience before anything else."];
+var audNotes=["You already have an owned audience. Your email platform is your most important investment.","Your social scheduling tool is critical. Make it reliable and consistent.","Add Google Search Console. It is free and shows exactly what content is working for you.","Make sure your pixel tracking and analytics are solid before spending another dollar on ads.","Start with email capture. Word of mouth is powerful until it stops. Own your audience now."];
+
+var cur=0,ans=new Array(10).fill(-1);
+
+function getLevel(){
+  var b=ans[3]>=0?ans[3]+1:1;
+  var t=ans[6]>=0?ans[6]+1:1;
+  var avg=(b+t)/2;
+  if(avg<=1.5)return'wy';
+  if(avg<=2.5)return'og';
+  if(avg<=3.5)return'bp';
+  if(avg<=4.25)return'br';
+  return'bb';
+}
+
+function getAnswerText(i){
+  var a=ans[i];
+  return a>=0?WQs[i].opts[a].l:'Not answered';
+}
+
+function render(){
+  var q=WQs[cur];
+  document.getElementById('wmt').textContent=q.mod;
+  document.getElementById('wqt').textContent=q.q;
+  document.getElementById('wqs').textContent=q.sub||'';
+  document.getElementById('wpf').style.width=((cur+1)/10*100)+'%';
+  document.getElementById('wsl').textContent=(cur+1)+' of 10';
+  var html='';
+  for(var i=0;i<q.opts.length;i++){
+    var o=q.opts[i];
+    html+='<div class="opt'+(ans[cur]===i?' sel':'')+'" onclick="pick('+i+')"><div class="ol">'+o.l+'</div>'+(o.s?'<div class="os">'+o.s+'</div>':'')+'</div>';
+  }
+  document.getElementById('wopts').innerHTML=html;
+  document.getElementById('wbn').textContent='Next';
+  document.getElementById('wcover').style.display='none';
+  document.getElementById('wq').style.display='block';
+  document.getElementById('wcap').style.display='none';
+  document.getElementById('wres').style.display='none';
+  window.scrollTo(0,0);
+}
+
+function showQ(){
+  document.getElementById('wcap').style.display='none';
+  document.getElementById('wq').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function pick(i){ans[cur]=i;render();}
+
+function wPrev(){
+  if(cur===0){restart();return;}
+  cur--;render();
+}
+
+function wNext(){
+  if(ans[cur]===-1)return;
+  if(cur===9){
+    document.getElementById('wq').style.display='none';
+    document.getElementById('wcap').style.display='block';
+    window.scrollTo(0,0);
+    return;
+  }
+  cur++;render();
+}
+
+function submitAndShow(){
+  var name=document.getElementById('cap-name').value.trim();
+  var email=document.getElementById('cap-email').value.trim();
+  if(!name){document.getElementById('cap-name').focus();return;}
+  if(!email||email.indexOf('@')<0){document.getElementById('cap-email').focus();return;}
+
+  var key=getLevel();
+  var belt=BELTS[key].label;
+
+  var payload={
+    'form-name':'wotdw-responses',
+    name:name,email:email,belt_level:belt,
+    q1_business_type:getAnswerText(0),
+    q2_sales_method:getAnswerText(1),
+    q3_audience_location:getAnswerText(2),
+    q4_budget:getAnswerText(3),
+    q5_free_tools:getAnswerText(4),
+    q6_unused_subscriptions:getAnswerText(5),
+    q7_tech_comfort:getAnswerText(6),
+    q8_landing_page:getAnswerText(7),
+    q9_email_list:getAnswerText(8),
+    q10_paid_ads:getAnswerText(9)
+  };
+
+  var fd=new URLSearchParams();
+  for(var k in payload)fd.append(k,payload[k]);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).catch(function(){});
+
+  if(GHL_WEBHOOK&&GHL_WEBHOOK!=='YOUR_GHL_WEBHOOK_URL_HERE'){
+    fetch(GHL_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+  }
+
+  showRes(name,key);
+}
+
+function showRes(name,key){
+  var S=BELTS[key];
+  var audit=ans[5]===0||ans[5]===1;
+  var bn=ans[0]>=0?bizNotes[ans[0]]:'';
+  var an=ans[2]>=0?audNotes[ans[2]]:'';
+  var note=[bn,an].filter(Boolean).join(' ');
+  document.getElementById('wcap').style.display='none';
+  var rows='';
+  for(var i=0;i<S.tools.length;i++){
+    var t=S.tools[i];
+    rows+='<div class="rsr"><div class="rsi">'+t.ico+'</div><div style="flex:1"><div class="rsc">'+t.cat+'</div><div class="tool-row"><span class="tool-num">1.</span><span class="tool-name">'+t.t1+'</span></div><div class="tool-row"><span class="tool-num">2.</span><span class="tool-name-alt">'+t.t2+'</span></div><div class="tool-divider"></div><div class="rsw">'+t.why+'</div></div></div>';
+  }
+  var r=document.getElementById('wres');
+  r.innerHTML=
+    '<div class="topbar"><div class="logo">WOTDW</div><div class="pw"><div class="pt"><div class="pf" style="width:100%"></div></div><div class="sl">Complete</div></div></div>'+
+    '<div class="bpill" style="background:'+S.pillbg+';border:1px solid '+S.pillborder+'"><div class="bdots"><div class="bdot" style="background:'+S.dot1+'"></div><div class="bdot" style="background:'+S.dot2+'"></div></div><span class="blt" style="color:'+S.dot2+'">'+S.label+'</span></div>'+
+    '<div class="rtt">Here is your stack, '+name+'</div>'+
+    '<div class="rin">'+S.intro+'</div>'+
+    '<div class="rph">'+S.philosophy+'</div>'+
+    (note?'<div class="rcn">'+note+'</div>':'')+
+    (audit?'<div class="rab"><div class="rat">Stack audit recommended</div><div class="rai">Before adding anything new, list every tool you pay for and when you last used it. Cancel anything untouched in 60 days. Your best budget move costs nothing.</div></div>':'')+
+    '<div class="rsg">'+rows+'</div>'+
+    '<div class="rdv"></div>'+
+    '<div class="rct"><div class="rctt">Ready to build this stack live?</div><div class="rcts">Join the Digital Warrior 3-Week Free Trial and set up your first working stack from scratch. Your belt level, your pace.</div><button class="bct" onclick="window.open(\'https://wayofthedigitalwarrior.org/3-week-free-trial-2026-454585\',\'_blank\')">Join the 3-Week Free Trial</button></div>'+
+    '<button class="brs" onclick="restart()">Start over</button>'+
+    '<div class="wf">wayofthedigitalwarrior.org</div>';
+  r.style.display='block';
+  window.scrollTo(0,0);
+}
+
+function restart(){
+  cur=0;ans=new Array(10).fill(-1);
+  document.getElementById('wres').style.display='none';
+  document.getElementById('wcap').style.display='none';
+  document.getElementById('wq').style.display='none';
+  document.getElementById('wcover').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function wStart(){render();}
+</script>
+</body>
+</html>
